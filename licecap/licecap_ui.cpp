@@ -24,10 +24,10 @@
 #include <process.h>
 #include <multimon.h>
 #else
-#include "../WDL/swell/swell.h"
+#include "WDL/WDL/swell/swell.h"
 #endif
-#include "../WDL/queue.h"
-#include "../WDL/mutex.h"
+#include "WDL/WDL/queue.h"
+#include "WDL/WDL/mutex.h"
 
 
 #ifdef REAPER_LICECAP
@@ -59,16 +59,16 @@
   #define LICE_CreateSysBitmap(w,h) new LICE_SysBitmap(w,h)
   #define LICE_CreateMemBitmap(w,h) new LICE_MemBitmap(w,h)
 
-  #include "../WDL/lice/lice_lcf.h"
-  #include "../WDL/filebrowse.h"
+  #include "WDL/WDL/lice/lice_lcf.h"
+  #include "WDL/WDL/filebrowse.h"
 #endif
 
 
 
 
-#include "../WDL/wdltypes.h"
-#include "../WDL/wingui/wndsize.h"
-#include "../WDL/wdlstring.h"
+#include "WDL/WDL/wdltypes.h"
+#include "WDL/WDL/wingui/wndsize.h"
+#include "WDL/WDL/wdlstring.h"
 
 
 #include "licecap_version.h"
@@ -884,7 +884,7 @@ static WDL_DLGRET liceCapMainProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM
     case WM_INITDIALOG:
       g_hwnd=hwndDlg;
 #ifdef _WIN32
-      SetClassLong(hwndDlg,GCL_HICON,(LPARAM)LoadIcon(GetModuleHandle(NULL),MAKEINTRESOURCE(IDI_ICON1)));
+      SetClassLong(hwndDlg,-14,(LPARAM)LoadIcon(GetModuleHandle(NULL),MAKEINTRESOURCE(IDI_ICON1)));
 #elif defined(__APPLE__)
       extern void SWELL_SetWindowShadow(HWND, bool);
       void SetNSWindowOpaque(HWND, bool);
@@ -1930,7 +1930,7 @@ REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(REAPER_PLUGIN_HINSTANCE hI
 
 #ifndef _WIN32
 
-#include "../WDL/swell/swell-dlggen.h"
+#include "WDL/WDL/swell/swell-dlggen.h"
 #include "licecap.rc_mac_dlg"
 
 #endif

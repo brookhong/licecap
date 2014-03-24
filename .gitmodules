@@ -1,0 +1,3 @@
+[submodule "licecap/WDL"]
+	path = licecap/WDL
+	url = git@github.com:brookhong/WDL.git
