@@ -885,6 +885,7 @@ static WDL_DLGRET liceCapMainProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM
             g_hwnd=hwndDlg;
 #ifdef _WIN32
             SetClassLong(hwndDlg,-14,(LPARAM)LoadIcon(GetModuleHandle(NULL),MAKEINTRESOURCE(IDI_ICON1)));
+            RegisterHotKey(hwndDlg, IDC_STOP, MOD_CONTROL|MOD_ALT, 'S');
 #elif defined(__APPLE__)
             extern void SWELL_SetWindowShadow(HWND, bool);
             void SetNSWindowOpaque(HWND, bool);
@@ -961,6 +962,8 @@ static WDL_DLGRET liceCapMainProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM
             g_hwnd=NULL;
 #ifndef _WIN32
             SWELL_PostQuitMessage(0);
+#else
+            UnregisterHotKey(hwndDlg, IDC_STOP);
 #endif
 
             break;
@@ -1149,6 +1152,14 @@ static WDL_DLGRET liceCapMainProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM
                 if (lParam == MAKELPARAM(MOD_CONTROL|MOD_ALT, 'P') && (g_prefs&16)) // prefs check not necessary
                 {
                     SendMessage(hwndDlg, WM_COMMAND, IDC_REC, 0);
+                }
+                if (lParam == MAKELPARAM(MOD_CONTROL|MOD_ALT, 'S')) // prefs check not necessary
+                {
+                    if(!g_cap_state) {
+                        SendMessage(hwndDlg, WM_COMMAND, IDC_REC, 0);
+                    } else {
+                        SendMessage(hwndDlg, WM_COMMAND, IDC_STOP, 0);
+                    }
                 }
                 break;
 #else
